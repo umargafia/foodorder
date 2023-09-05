@@ -1,48 +1,84 @@
-import {
-  Avatar,
-  Badge,
-  Box,
-  Button,
-  IconButton,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import AppleIcon from '@mui/icons-material/Apple';
-import { Home } from '@mui/icons-material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import CartDrawer from '../cart/Cart';
+import SoupKitchenIcon from '@mui/icons-material/SoupKitchen';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Profile from '../../screens/Profile';
-import { useSelector } from 'react-redux';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import { logout } from '../../store/authSlice';
+
 function MyAppbar() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const { noOfCarts, user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const handleOpen = () => {
     setOpen((pre) => !pre);
   };
 
   const handleOpenProfile = () => {
-    setOpenProfile((pre) => !pre);
+    dispatch(logout());
+    localStorage.clear();
   };
 
-  function handleClick(e) {
-    console.log(e);
-  }
-
   return (
-    <AppBar position="sticky" sx={{ mb: 4 }}>
-      <CartDrawer open={open} handleOpen={handleOpen} />
+    <AppBar position="absolute">
       <Profile
         openProfile={openProfile}
         handleOpenProfile={handleOpenProfile}
       />
-      <Toolbar sx={{ mx: 10 }}>
+      <Toolbar sx={{ mx: 10, display: 'flex' }}>
+        <Box sx={{ mr: '60%' }}>
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit"
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            <Typography color="white">Home</Typography>
+          </IconButton>
+
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit"
+            onClick={() => navigate('/cart')}
+          >
+            <Typography color="white">Carts</Typography>
+          </IconButton>
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit"
+            onClick={() => {
+              navigate('/recept');
+            }}
+          >
+            <Typography color="white">Orders</Typography>
+          </IconButton>
+          <IconButton
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit"
+            onClick={handleOpenProfile}
+          >
+            <Typography
+              sx={{
+                mt: 0.5,
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+                color: 'error.main',
+              }}
+            >
+              Logout
+            </Typography>
+          </IconButton>
+        </Box>
         <Typography
           variant="h6"
           component="div"
@@ -58,60 +94,9 @@ function MyAppbar() {
               navigate('/');
             }}
           >
-            <AppleIcon sx={{ mt: -1 }} />
-            Store
+            <SoupKitchenIcon color="white" /> Food Store
           </Button>
         </Typography>
-        <Box>
-          <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
-            onClick={() => {
-              navigate('/');
-            }}
-          >
-            <Home color="white" sx={{ color: 'white', fontSize: 35 }} />
-          </IconButton>
-
-          <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
-            onClick={handleOpen}
-          >
-            <Badge badgeContent={noOfCarts} color="error">
-              <ShoppingCartIcon sx={{ color: 'white', fontSize: 35 }} />
-            </Badge>
-          </IconButton>
-          <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
-            onClick={() => {
-              navigate('/recept');
-            }}
-          >
-            <LocalShippingIcon
-              color="white"
-              sx={{ color: 'white', fontSize: 35 }}
-            />
-          </IconButton>
-          <IconButton
-            size="large"
-            aria-label="show 4 new mails"
-            color="inherit"
-            onClick={handleOpenProfile}
-          >
-            <Avatar>
-              <Typography
-                sx={{ mt: 0.5, fontWeight: 'bold', textTransform: 'uppercase' }}
-              >
-                {user.name.charAt(0)}
-              </Typography>
-            </Avatar>
-          </IconButton>
-        </Box>
       </Toolbar>
     </AppBar>
   );

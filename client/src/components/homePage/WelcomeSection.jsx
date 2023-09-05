@@ -10,7 +10,7 @@ import MyCard from '../global/Mycard';
 export default function WelcomeSection() {
   const navigate = useNavigate();
   return (
-    <MyCard>
+    <MyCard sx={{ mt: 10 }}>
       <Grid container>
         <Grid
           sm={12}

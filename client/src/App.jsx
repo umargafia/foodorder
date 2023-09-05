@@ -9,6 +9,7 @@ import AuthPage from './screens/AuthPage';
 import OrderPage from './screens/OrderPage';
 import ReceptPage from './screens/ReciptPage';
 import AdminHome from './screens/admin/AdminHome';
+import CartDrawer from './components/cart/Cart';
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -28,6 +29,10 @@ function App() {
     {
       path: '/order',
       element: <OrderPage />,
+    },
+    {
+      path: '/cart',
+      element: <CartDrawer />,
     },
     {
       path: '/recept',
