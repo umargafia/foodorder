@@ -1,12 +1,22 @@
-import { Box, CircularProgress, Divider, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  Typography,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MyCard from '../global/Mycard';
 import { InfoItemFW } from './InfoItem';
 import MyButton from '../global/MyButton';
-import { AddToCart, createOrder } from '../../store/api';
+import { AddToCart, createOrder, getAddress } from '../../store/api';
+import Address from './Address';
+import MyModel from '../global/MyModel';
+import { toggleModel } from '../../store/authSlice';
+import Billing from './Billing';
 
 function Item() {
   const location = useLocation();
@@ -15,6 +25,9 @@ function Item() {
   const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [address, setAddress] = useState(false);
+  const dispatch = useDispatch();
+  const [togAdd, setTogAdd] = useState(true);
 
   useEffect(() => {
     setTotalPrice(parseInt(cartInfo.totalPrice + 1000 + 400));
@@ -44,7 +57,6 @@ function Item() {
       return;
     }
 
-    // loop through the carts id and create a order
     let response;
     for (const cart of carts) {
       response = await createOrder({ token, cartId: cart._id });
@@ -55,13 +67,32 @@ function Item() {
     return;
   };
 
+  function handleAddress() {
+    setTogAdd(true);
+    dispatch(toggleModel());
+  }
+  function handleCredith() {
+    setTogAdd(false);
+    dispatch(toggleModel());
+  }
+
   return (
     <MyCard sx={{ bgcolor: 'white', minHeight: '50vh', p: 3 }}>
+      <MyModel>{togAdd ? <Address /> : <Billing />}</MyModel>
       <InfoItemFW title="Number of Items" text={cartInfo.noOfItems} normal />
       <InfoItemFW title="Subtotal" text={cartInfo.totalPrice} />
       <InfoItemFW title="Shipping" text="1000" />
       <InfoItemFW title="Tax" text="400" />
       <InfoItemFW title="Discount" text="000" />
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Button onClick={handleAddress} variant="outlined" sx={{ mt: 2 }}>
+          Edith Address
+        </Button>
+        <Button onClick={handleCredith} variant="outlined" sx={{ mt: 2 }}>
+          Edith Billing Info
+        </Button>
+      </Box>
+
       <Box sx={{ mt: '40%' }}>
         <Typography sx={{ textAlign: 'right', fontSize: 30 }}>
           ₦{totalPrice}
