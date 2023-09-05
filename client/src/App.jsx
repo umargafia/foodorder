@@ -33,10 +33,6 @@ function App() {
       path: '/recept',
       element: <ReceptPage />,
     },
-    {
-      path: '/admin/home',
-      element: <AdminHome />,
-    },
   ]);
 
   const isNotAuth = createBrowserRouter([
@@ -46,13 +42,25 @@ function App() {
     },
   ]);
 
+  const adminRoutes = createBrowserRouter([
+    {
+      path: '/',
+      element: <AdminHome />,
+    },
+  ]);
+
   const theme = useTheme();
+  console.log(user);
   return (
     <Box
       sx={{ backgroundColor: theme.palette.primary.white, minHeight: '100vh' }}
     >
       <Box sx={{ backgroundColor: theme.palette.primary.white, m: 0, px: 15 }}>
-        <RouterProvider router={user ? router : isNotAuth} />
+        <RouterProvider
+          router={
+            user ? (user?.role === 'admin' ? adminRoutes : router) : isNotAuth
+          }
+        />
       </Box>
       <Footer />
     </Box>

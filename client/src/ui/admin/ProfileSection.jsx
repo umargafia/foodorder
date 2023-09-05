@@ -2,18 +2,26 @@ import { Avatar, Button, Divider, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import MyModel from '../../components/global/MyModel';
-import { toggleModel } from '../../store/authSlice';
+import { logout, toggleModel } from '../../store/authSlice';
 import AddUserForm from '../../components/admin/Form';
 
 function ProfileSection() {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigator = useNavigate();
 
   const handleCreateUser = async () => {
     dispatch(toggleModel());
   };
+
+  function handleLogout() {
+    dispatch(logout());
+    localStorage.clear();
+    navigator('/');
+  }
 
   return (
     <Grid container>
@@ -62,6 +70,7 @@ function ProfileSection() {
       <Grid xs={12}>
         <Button
           variant="contained"
+          onClick={handleLogout}
           fullWidth
           sx={{
             color: 'white',
