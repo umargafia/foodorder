@@ -1,0 +1,45 @@
+.slide-in {
+  position: relative;
+  animation: slideIn 3.5s ease-out forwards;
+  opacity: 0; /* Start with opacity at 0 */
+  transform: translateX(-50px); /* Start with element off-screen to the left */
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(
+      -50px
+    ); /* Start with element off-screen to the left */
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(10px); /* Gradually move element to the right */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* Bring element to its final position */
+  }
+}
+
+.bottom-slide-in {
+  position: relative;
+  animation: bottomSlideIn 3.5s ease-out forwards;
+  opacity: 0; /* Start with opacity at 0 */
+  transform: translateY(50px); /* Start with element off-screen below */
+}
+
+@keyframes bottomSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(50px); /* Start with element off-screen to the left */
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-10px); /* Gradually move element to the right */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* Bring element to its final position */
+  }
+}

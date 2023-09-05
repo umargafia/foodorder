@@ -11,7 +11,7 @@ function HomePage() {
     <Box>
       <MyAppbar />
       <WelcomeSection />
-      <AdsSection />
+      {/* <AdsSection /> */}
       <CardsSection />
     </Box>
   );
