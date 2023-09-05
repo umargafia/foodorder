@@ -12,17 +12,33 @@ function Carts({ item }) {
   }
   return (
     <Grid container sm={5} md={2} sx={{ m: 2 }}>
-      <MyCard sx={{ padding: 3 }}>
+      <MyCard
+        sx={{
+          transition: 'all 1s',
+          '&:hover': {
+            transform: 'scale(1.1)', // Use a string to define the transform property
+          },
+        }}
+      >
         <Box
           sx={{
-            height: 250,
+            height: 200,
+            width: 200,
             display: 'flex',
             alignItems: 'center',
             cursor: 'pointer',
+            overflow: 'hidden',
           }}
           onClick={() => handleClick(item)}
         >
-          <img src={item.image} alt={item.name} style={{ width: '100%' }} />
+          <img
+            src={item.image}
+            alt={item.name}
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+          />
         </Box>
         <Divider sx={{ my: 2 }} />
         <Grid

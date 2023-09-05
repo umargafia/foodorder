@@ -15,7 +15,7 @@ export default function Footer() {
       }}
     >
       <Typography sx={{ fontWeight: 'bold' }}>
-        Copyright © 2023 AppleStore Inc.
+        Copyright © 2023 Food Store Inc.
       </Typography>
     </Box>
   );
