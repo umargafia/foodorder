@@ -13,7 +13,7 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import React, { useEffect, useState } from 'react';
 
 import MyCard from '../../components/global/Mycard';
-import image from '../../assets/12.jpg';
+import image from '../../assets/header.jpg';
 import IphoneList from '../../constants/IphoneLists';
 import FormatDate from '../../constants/FormatDate';
 import { useSelector } from 'react-redux';
