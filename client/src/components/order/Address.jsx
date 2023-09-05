@@ -196,7 +196,7 @@ function Address() {
             text={addressData.localGov || 'N/A'}
           />
           <InfoItem title="Street" text={addressData.street || 'N/A'} />
-          <MyButton text="Edit" onClick={() => setEdit(true)} />
+          <MyButton text="Edit" onClick={() => setEdit(true)} fullWidth />
         </Box>
       )}
     </Grid>

@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Card, CircularProgress, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -51,8 +51,10 @@ export default function ReceptPage() {
   return (
     <>
       <MyAppbar />
-      <Box>
-        <Mycard sx={{ mb: 1, height: '60vh', overflowY: 'auto', p: 2 }}>
+      <Box display="flex" sx={{ mt: 10 }}>
+        <Mycard
+          sx={{ mb: 1, height: '90vh', overflowY: 'auto', p: 2, flex: 3 }}
+        >
           <Typography variant="h4" color="primary">
             Orders
           </Typography>
@@ -86,16 +88,20 @@ export default function ReceptPage() {
             })
           )}
         </Mycard>
-        <Mycard sx={{ mb: 2, p: 2 }}>
+        <Box sx={{ mb: 2, p: 2, flex: 1 }}>
           <Grid container>
-            <Grid sm={6} sx={{ borderRight: '1px solid gray' }}>
-              <Billing />
+            <Grid sm={12} width="100%">
+              <Card>
+                <Billing />
+              </Card>
             </Grid>
-            <Grid sm={6} sx={{ pl: 2 }}>
-              <Address />
+            <Grid sm={12} width="100%" sx={{ mt: 5 }}>
+              <Card>
+                <Address />
+              </Card>
             </Grid>
           </Grid>
-        </Mycard>
+        </Box>
       </Box>
     </>
   );
