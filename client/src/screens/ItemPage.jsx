@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
-import { Box, Button, CircularProgress, Typography } from '@mui/material';
+import { Box, Button, Card, CircularProgress, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import MyButton from '../components/global/MyButton';
@@ -67,7 +67,7 @@ function ItemPage() {
 
     await AddToCart({ data, token });
     setIsLoading(false);
-    navigate('/');
+    navigate('/cart');
   }
 
   const handleBuyNow = () => {
@@ -86,27 +86,24 @@ function ItemPage() {
   return (
     <>
       <MyAppbar />
-      <Grid container>
+      <Grid container sx={{ mt: 10, mb: 5 }}>
         <Grid
           sm={12}
-          md={6}
           sx={{
             bgcolor: 'primary.pureWhite',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             mb: 2,
             py: 2,
           }}
         >
-          <img
-            src={item.image}
-            alt={item.name}
-            style={{ height: 'calc(100vh - 10rem ' }}
-          />
+          <Card sx>
+            <img src={item.image} alt={item.name} style={{ height: 400 }} />
+          </Card>
         </Grid>
         <Grid
           sm={12}
-          md={6}
           container
           sx={{
             display: 'flex',
@@ -119,12 +116,10 @@ function ItemPage() {
           <Typography variant="h3" color={'primary.main'}>
             {item.name}
           </Typography>
-          <Typography variant="h5" color="gray" fontWeight="bold">
-            Brand: Apple
-          </Typography>
+
           <Typography variant="h5">₦{price}</Typography>
           <Typography sx={{ mt: 2, color: 'gray' }}>
-            30% OFF ON ALL ORDERS
+            10% OFF ORDER NOW
           </Typography>
           <Box
             sx={{

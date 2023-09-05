@@ -48,7 +48,7 @@ function CartsItem({ item, fetchCarts }) {
         }}
         xs={12}
       >
-        <Grid xs={3} sx={{ cursor: 'pointer' }} onClick={handleNavigate}>
+        <Grid xs={1.5} sx={{ cursor: 'pointer' }} onClick={handleNavigate}>
           <img
             src={curItem?.image}
             alt={curItem?.name}
